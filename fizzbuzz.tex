@@ -1,8 +1,26 @@
 \documentclass{article}
 \usepackage{hyperref}
+
+% Modulus: http://tex.stackexchange.com/questions/15585/how-to-mod-a-counters-value
+\usepackage{intcalc}
+
+% Conditional
+\usepackage{etoolbox}
+
+\newcommand\fizzbuzz{2}{%
+\newcounter{i}
+\setcounter{i}{1}
+\whileboolexpr{\ifnumcomp{\thei}{<}{#2}{true}{false}}%
+{\ifnumequal{0}{\intcalcMod{\thei}{15}}{FizzBuzz}%
+{\ifnumequal{0}{\intcalcMod{\thei}{3}}{Fizz}%
+{\ifnumequal{0}{\intcalcMod{\thei}{5}}{Buzz}%
+{\thei}}}}
+\addtocounter{#1}{1}
 \title{FizzBuzz}
 \author{Thomas Levine}
+
 \begin{document}
+
 \maketitle
 \begin{quote}
 Directions from the \href{https://www.hackerschool.com/apply}{Hacker School Application}:
@@ -12,5 +30,7 @@ If the number is divisible by 3, print Fizz instead of the number. If it's divis
 \end{quote}
 
 \section{Output}
+\fizzbuzz{1}{100}
+
 
 \end{document}
